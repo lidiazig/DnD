@@ -6,8 +6,8 @@ class HabilidadesRoutes {
         this.config();
     }
     config(): void {
-        this.router.get('/habilidades', habilidadesController.list);
-        this.router.get('/habilidades/:id', habilidadesController.getOne);
+        this.router.get('/', habilidadesController.list);
+        this.router.get('/:id', habilidadesController.getOne);
     }
 }
 const habilidadesRoutes = new HabilidadesRoutes();

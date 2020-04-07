@@ -11,8 +11,8 @@ class DotesRoutes {
         this.config();
     }
     config() {
-        this.router.get('/dotes', dotesController_1.default.list);
-        this.router.get('/dotes/:id', dotesController_1.default.getOne);
+        this.router.get('/', dotesController_1.default.list);
+        this.router.get('/:id', dotesController_1.default.getOne);
     }
 }
 const dotesRoutes = new DotesRoutes();

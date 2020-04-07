@@ -6,8 +6,8 @@ class IdiomasRoutes {
         this.config();
     }
     config(): void {
-        this.router.get('/idiomas', idiomasController.list);
-        this.router.get('(idiomas/:id', idiomasController.getOne);
+        this.router.get('/', idiomasController.list);
+        this.router.get('/:id', idiomasController.getOne);
     }
 }
 const idiomasRoutes = new IdiomasRoutes();

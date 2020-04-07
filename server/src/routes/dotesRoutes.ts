@@ -6,8 +6,8 @@ class DotesRoutes {
         this.config();
     }
     config(): void {
-        this.router.get('/dotes', dotesController.list);
-        this.router.get('/dotes/:id', dotesController.getOne);
+        this.router.get('/', dotesController.list);
+        this.router.get('/:id', dotesController.getOne);
     }
 }
 const dotesRoutes = new DotesRoutes();

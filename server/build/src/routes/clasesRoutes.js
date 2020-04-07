@@ -11,8 +11,8 @@ class ClasesRoutes {
         this.config();
     }
     config() {
-        this.router.get('/clases', clasesController_1.default.list);
-        this.router.get('/clases/:id', clasesController_1.default.getOne);
+        this.router.get('/', clasesController_1.default.list);
+        this.router.get('/:id', clasesController_1.default.getOne);
     }
 }
 const clasesRoutes = new ClasesRoutes();

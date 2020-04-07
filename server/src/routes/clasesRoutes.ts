@@ -6,8 +6,8 @@ class ClasesRoutes {
         this.config();
     }
     config(): void {
-        this.router.get('/clases', clasesController.list);
-        this.router.get('/clases/:id', clasesController.getOne);
+        this.router.get('/', clasesController.list);
+        this.router.get('/:id', clasesController.getOne);
     }
 }
 const clasesRoutes = new ClasesRoutes();

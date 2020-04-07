@@ -11,8 +11,8 @@ class AlineamientosRoutes {
         this.config();
     }
     config() {
-        this.router.get('/alineamientos', alineamientosController_1.default.list);
-        this.router.get('/alineamientos/:id', alineamientosController_1.default.getOne);
+        this.router.get('/', alineamientosController_1.default.list);
+        this.router.get('/:id', alineamientosController_1.default.getOne);
     }
 }
 const alineamientosRoutes = new AlineamientosRoutes();

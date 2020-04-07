@@ -11,8 +11,8 @@ class RazasRoutes {
         this.config();
     }
     config() {
-        this.router.get('/razas', razasController_1.default.list);
-        this.router.get('/razas/:id', razasController_1.default.getOne);
+        this.router.get('/', razasController_1.default.list);
+        this.router.get('/:id', razasController_1.default.getOne);
     }
 }
 const razasRoutes = new RazasRoutes();

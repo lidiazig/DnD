@@ -11,8 +11,8 @@ class HabilidadesRoutes {
         this.config();
     }
     config() {
-        this.router.get('/habilidades', habilidadesController_1.default.list);
-        this.router.get('/habilidades/:id', habilidadesController_1.default.getOne);
+        this.router.get('/', habilidadesController_1.default.list);
+        this.router.get('/:id', habilidadesController_1.default.getOne);
     }
 }
 const habilidadesRoutes = new HabilidadesRoutes();
