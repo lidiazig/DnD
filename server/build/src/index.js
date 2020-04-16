@@ -11,6 +11,8 @@ const dotesRoutes_1 = __importDefault(require("./routes/dotesRoutes"));
 const habilidadesRoutes_1 = __importDefault(require("./routes/habilidadesRoutes"));
 const idiomasRoutes_1 = __importDefault(require("./routes/idiomasRoutes"));
 const razasRoutes_1 = __importDefault(require("./routes/razasRoutes"));
+const hechizosRoutes_1 = __importDefault(require("./routes/hechizosRoutes"));
+const usuariosRoutes_1 = __importDefault(require("./routes/usuariosRoutes"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 class Server {
@@ -34,6 +36,8 @@ class Server {
         this.app.use('/api/habilidades', habilidadesRoutes_1.default);
         this.app.use('/api/idiomas', idiomasRoutes_1.default);
         this.app.use('/api/razas', razasRoutes_1.default);
+        this.app.use('/api/hechizos', hechizosRoutes_1.default);
+        this.app.use('/api/usuarios', usuariosRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port')), () => {

@@ -6,6 +6,8 @@ import dotesRoutes from './routes/dotesRoutes';
 import habilidadesRoutes from './routes/habilidadesRoutes';
 import idiomasRoutes from './routes/idiomasRoutes';
 import razasRoutes from './routes/razasRoutes';
+import hechizosRoutes from './routes/hechizosRoutes';
+import usuariosRoutes from './routes/usuariosRoutes';
 import morgan from 'morgan';
 import cors from 'cors';
 
@@ -33,6 +35,8 @@ class Server {
         this.app.use('/api/habilidades',habilidadesRoutes);
         this.app.use('/api/idiomas',idiomasRoutes);
         this.app.use('/api/razas',razasRoutes);
+        this.app.use('/api/hechizos',hechizosRoutes);
+        this.app.use('/api/usuarios',usuariosRoutes);
     }
 
     start(): void {
