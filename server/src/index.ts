@@ -8,6 +8,7 @@ import idiomasRoutes from './routes/idiomasRoutes';
 import razasRoutes from './routes/razasRoutes';
 import hechizosRoutes from './routes/hechizosRoutes';
 import usuariosRoutes from './routes/usuariosRoutes';
+import inventarioRoutes from './routes/inventarioRoutes';
 import morgan from 'morgan';
 import cors from 'cors';
 
@@ -37,6 +38,7 @@ class Server {
         this.app.use('/api/razas',razasRoutes);
         this.app.use('/api/hechizos',hechizosRoutes);
         this.app.use('/api/usuarios',usuariosRoutes);
+        this.app.use('/api/inventario',inventarioRoutes);
     }
 
     start(): void {
