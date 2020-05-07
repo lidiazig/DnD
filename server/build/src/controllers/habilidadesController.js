@@ -16,8 +16,18 @@ const database_1 = __importDefault(require("../../database"));
 class HabilidadesController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const habilidades = yield database_1.default.then((r) => r.query('SELECT * FROM habilidades'));
+            const habilidades = yield database_1.default.then((r) => r.query('select * from habilidades'));
             res.json(habilidades);
+        });
+    }
+    listPj(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const habilidades = yield database_1.default.then((r) => r.query('select * from habilidades h inner join habilidades_personaje hp on hp.id_habilidad=h.id where hp.id_personaje=? order by h.nombre', [id]));
+            if (habilidades.length > 0) {
+                return res.json(habilidades);
+            }
+            res.status(404).json({ text: 'El personaje no existe' });
         });
     }
     getOne(req, res) {

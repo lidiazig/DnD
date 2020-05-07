@@ -7,6 +7,7 @@ class HabilidadesRoutes {
     }
     config(): void {
         this.router.get('/', habilidadesController.list);
+        this.router.get('/', habilidadesController.listPj);
         this.router.get('/:id', habilidadesController.getOne);
     }
 }

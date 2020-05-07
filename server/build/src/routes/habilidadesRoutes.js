@@ -12,6 +12,7 @@ class HabilidadesRoutes {
     }
     config() {
         this.router.get('/', habilidadesController_1.default.list);
+        this.router.get('/', habilidadesController_1.default.listPj);
         this.router.get('/:id', habilidadesController_1.default.getOne);
     }
 }
