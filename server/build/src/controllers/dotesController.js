@@ -13,21 +13,34 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../../database"));
+const userCheck_1 = __importDefault(require("./userCheck"));
 class DotesController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const dotes = yield database_1.default.then((r) => r.query('SELECT * FROM dotes'));
-            res.json(dotes);
+            var id = req.body.token;
+            if (yield userCheck_1.default.checkUser(id)) {
+                const dotes = yield database_1.default.then((r) => r.query('SELECT * FROM dotes'));
+                res.json(dotes);
+            }
+            else {
+                res.status(401).json({ text: 'Usuario no autorizado' });
+            }
         });
     }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
-            const dote = yield database_1.default.then((r) => r.query('SELECT * FROM dotes WHERE id=?', [id]));
-            if (dote.length > 0) {
-                return res.json(dote[0]);
+            var token = req.body.token;
+            if (yield userCheck_1.default.checkUser(token)) {
+                const { id } = req.params;
+                const dote = yield database_1.default.then((r) => r.query('SELECT * FROM dotes WHERE id=?', [id]));
+                if (dote.length > 0) {
+                    return res.json(dote[0]);
+                }
+                res.status(404).json({ text: 'La dote no existe' });
             }
-            res.status(404).json({ text: 'La dote no existe' });
+            else {
+                res.status(401).json({ text: 'Usuario no autorizado' });
+            }
         });
     }
 }

@@ -1,21 +1,32 @@
 import { Request, Response } from 'express';
 import pool from "../../database";
+import userCheck from "./userCheck";
 
 
 class AlineamientosController {
 
     public async list(req: Request, res: Response){
-        const alineamientos = await pool.then((r: any) => r.query('SELECT * FROM alineamientos'));
-        res.json(alineamientos);
+        var id = req.body.token;
+        if(await userCheck.checkUser(id)){
+            const alineamientos = await pool.then((r: any) => r.query('SELECT * FROM alineamientos'));
+            res.json(alineamientos);
+        }else {
+            res.status(401).json({text: 'Usuario no autorizado'});
+        }
     }
 
     public async getOne(req: Request, res: Response){
-        const { id } = req.params;
-        const alineamiento = await pool.then((r:any) => r.query('SELECT * FROM alineamientos WHERE id=?', [id]));
-        if(alineamiento.length > 0){
-            return res.json(alineamiento[0]);
+        var token = req.body.token;
+        if(await userCheck.checkUser(token)){
+            const { id } = req.params;
+            const alineamiento = await pool.then((r:any) => r.query('SELECT * FROM alineamientos WHERE id=?', [id]));
+            if(alineamiento.length > 0){
+                return res.json(alineamiento[0]);
+            }
+            res.status(404).json({text: 'El alineamiento no existe'});
+        }else {
+            res.status(401).json({text: 'Usuario no autorizado'});
         }
-        res.status(404).json({text: 'El alineamiento no existe'});
     }
 }
 const alineamientosController = new AlineamientosController();

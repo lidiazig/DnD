@@ -11,7 +11,7 @@ class ClasesRoutes {
         this.config();
     }
     config() {
-        this.router.get('/', clasesController_1.default.list);
+        this.router.post('/', clasesController_1.default.list);
         this.router.get('/:id', clasesController_1.default.getOne);
     }
 }

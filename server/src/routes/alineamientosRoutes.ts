@@ -6,8 +6,8 @@ class AlineamientosRoutes {
         this.config();
     }
     config(): void {
-        this.router.get('/', alineamientosController.list);
-        this.router.get('/:id', alineamientosController.getOne);
+        this.router.post('/', alineamientosController.list);
+        this.router.post('/:id', alineamientosController.getOne);
     }
 }
 const alineamientosRoutes = new AlineamientosRoutes();

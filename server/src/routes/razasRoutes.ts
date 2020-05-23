@@ -6,8 +6,8 @@ class RazasRoutes {
         this.config();
     }
     config(): void {
-        this.router.get('/', razasController.list);
-        this.router.get('/:id', razasController.getOne);
+        this.router.post('/', razasController.list);
+        this.router.post('/:id', razasController.getOne);
     }
 }
 const razasRoutes = new RazasRoutes();

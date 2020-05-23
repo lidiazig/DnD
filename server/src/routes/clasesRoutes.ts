@@ -6,7 +6,7 @@ class ClasesRoutes {
         this.config();
     }
     config(): void {
-        this.router.get('/', clasesController.list);
+        this.router.post('/', clasesController.list);
         this.router.get('/:id', clasesController.getOne);
     }
 }

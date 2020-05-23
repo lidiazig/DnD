@@ -27,7 +27,7 @@ class UsuariosController {
         req.body.contrasena = shasum.digest('hex');
         const usuario = await pool.then((r: any) => r.query('SELECT * FROM usuarios WHERE email=? and contrasena=?', [req.body.email, req.body.contrasena]));
         if (usuario.length > 0) {
-            return res.json({text: 'usuario válido'});
+           return res.json(usuario[0].id);
         }
         res.status(404).json({text: 'Email o contraseña incorrecta'});
     }

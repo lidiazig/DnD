@@ -7,7 +7,7 @@ class InventarioRoutes {
     }
     config(): void {
         this.router.post('/', inventarioController.addObject);
-        this.router.get('/id', inventarioController.getInventario);
+        this.router.post('/id', inventarioController.getInventario);
     }
 }
 const inventarioRoutes = new InventarioRoutes();

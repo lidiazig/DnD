@@ -7,8 +7,8 @@ class HechizosRoutes {
         this.config();
     }
     config(): void {
-        this.router.get('/:id', hechizosController.getOne);
-        this.router.get('/clase/:id', hechizosController.getAllOneClass)
+        this.router.post('/:id', hechizosController.getOne);
+        this.router.post('/clase/:id', hechizosController.getAllOneClass)
     }
 }
 const hechizosRoutes = new HechizosRoutes();
