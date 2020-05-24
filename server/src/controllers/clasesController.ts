@@ -8,6 +8,7 @@ class ClasesController {
     public async list(req: Request, res: Response){
         var id = req.body.token;
         if(await userCheck.checkUser(id)){
+            delete req.body.token;
             const clases = await pool.then((r: any) => r.query('SELECT * FROM clases'));
             res.json(clases);
         }else {
@@ -19,6 +20,7 @@ class ClasesController {
     public async getOne(req: Request, res: Response){
         var token = req.body.token;
         if(await userCheck.checkUser(token)){
+            delete req.body.token;
             const { id } = req.params;
             const clase = await pool.then((r:any) => r.query('SELECT * FROM clases WHERE id=?', [id]));
             if(clase.length > 0){

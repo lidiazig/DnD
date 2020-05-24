@@ -19,8 +19,26 @@ class DotesController {
         return __awaiter(this, void 0, void 0, function* () {
             var id = req.body.token;
             if (yield userCheck_1.default.checkUser(id)) {
+                delete req.body.token;
                 const dotes = yield database_1.default.then((r) => r.query('SELECT * FROM dotes'));
                 res.json(dotes);
+            }
+            else {
+                res.status(401).json({ text: 'Usuario no autorizado' });
+            }
+        });
+    }
+    dotesPj(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var token = req.body.token;
+            if (yield userCheck_1.default.checkUser(token)) {
+                delete req.body.token;
+                const { id } = req.params;
+                const dote = yield database_1.default.then((r) => r.query('SELECT id,nombre FROM dotes WHERE id=any(select id_dote from dotes_personaje where id_personaje=?)', [id]));
+                if (dote.length > 0) {
+                    return res.json(dote[0]);
+                }
+                res.status(404).json({ text: 'La dote no existe' });
             }
             else {
                 res.status(401).json({ text: 'Usuario no autorizado' });
@@ -31,8 +49,9 @@ class DotesController {
         return __awaiter(this, void 0, void 0, function* () {
             var token = req.body.token;
             if (yield userCheck_1.default.checkUser(token)) {
+                delete req.body.token;
                 const { id } = req.params;
-                const dote = yield database_1.default.then((r) => r.query('SELECT * FROM dotes WHERE id=?', [id]));
+                const dote = yield database_1.default.then((r) => r.query('SELECT d.*, dp.notas FROM dotes d INNER JOIN dotes_personaje dp WHERE d.id=?', [id]));
                 if (dote.length > 0) {
                     return res.json(dote[0]);
                 }

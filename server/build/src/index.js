@@ -9,11 +9,16 @@ const alineamientosRoutes_1 = __importDefault(require("./routes/alineamientosRou
 const clasesRoutes_1 = __importDefault(require("./routes/clasesRoutes"));
 const dotesRoutes_1 = __importDefault(require("./routes/dotesRoutes"));
 const habilidadesRoutes_1 = __importDefault(require("./routes/habilidadesRoutes"));
-const idiomasRoutes_1 = __importDefault(require("./routes/idiomasRoutes"));
 const razasRoutes_1 = __importDefault(require("./routes/razasRoutes"));
 const hechizosRoutes_1 = __importDefault(require("./routes/hechizosRoutes"));
 const usuariosRoutes_1 = __importDefault(require("./routes/usuariosRoutes"));
 const inventarioRoutes_1 = __importDefault(require("./routes/inventarioRoutes"));
+const personajeRoutes_1 = __importDefault(require("./routes/personajeRoutes"));
+const caracteristicasRoutes_1 = __importDefault(require("./routes/caracteristicasRoutes"));
+const datosAdicionalesRoutes_1 = __importDefault(require("./routes/datosAdicionalesRoutes"));
+const equiposRoutes_1 = __importDefault(require("./routes/equiposRoutes"));
+const salvacionesRoutes_1 = __importDefault(require("./routes/salvacionesRoutes"));
+const vidaRoutes_1 = __importDefault(require("./routes/vidaRoutes"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 class Server {
@@ -35,11 +40,16 @@ class Server {
         this.app.use('/api/clases', clasesRoutes_1.default);
         this.app.use('/api/dotes', dotesRoutes_1.default);
         this.app.use('/api/habilidades', habilidadesRoutes_1.default);
-        this.app.use('/api/idiomas', idiomasRoutes_1.default);
         this.app.use('/api/razas', razasRoutes_1.default);
         this.app.use('/api/hechizos', hechizosRoutes_1.default);
         this.app.use('/api/usuarios', usuariosRoutes_1.default);
         this.app.use('/api/inventario', inventarioRoutes_1.default);
+        this.app.use('/api/personaje', personajeRoutes_1.default);
+        this.app.use('/api/caracteristicas', caracteristicasRoutes_1.default);
+        this.app.use('/api/datos', datosAdicionalesRoutes_1.default);
+        this.app.use('/api/equipo', equiposRoutes_1.default);
+        this.app.use('/api/salvaciones', salvacionesRoutes_1.default);
+        this.app.use('/api/vida', vidaRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port')), () => {

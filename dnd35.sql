@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-05-2020 a las 14:15:04
+-- Tiempo de generación: 24-05-2020 a las 19:44:56
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.1
 
@@ -64,6 +64,13 @@ CREATE TABLE `caracteristicas` (
   `carisma` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `caracteristicas`
+--
+
+INSERT INTO `caracteristicas` (`id_personaje`, `fuerza`, `destreza`, `constitucion`, `inteligencia`, `sabiduria`, `carisma`) VALUES
+(3, 20, 12, 16, 8, 13, 8);
+
 -- --------------------------------------------------------
 
 --
@@ -104,11 +111,11 @@ CREATE TABLE `datos_adicionales` (
   `iniciativa_dote` int(11) DEFAULT NULL,
   `ataque_base` int(11) NOT NULL,
   `velocidad` int(11) NOT NULL,
-  `resistencia_conjuros` int(11) NOT NULL,
-  `reduccion_dano` varchar(100) COLLATE utf16_spanish2_ci NOT NULL,
+  `resistencia_conjuros` int(11) DEFAULT NULL,
+  `reduccion_dano` varchar(100) COLLATE utf16_spanish2_ci DEFAULT NULL,
   `presa` int(11) NOT NULL,
-  `presa_tamano` int(11) NOT NULL,
-  `presa_dote` int(11) NOT NULL
+  `presa_tamano` int(11) DEFAULT NULL,
+  `presa_dote` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -289,8 +296,15 @@ INSERT INTO `dotes` (`id`, `nombre`, `prerrequisito`, `descripcion`) VALUES
 CREATE TABLE `dotes_personaje` (
   `id_personaje` int(11) NOT NULL,
   `id_dote` int(11) NOT NULL,
-  `notas` varchar(255) COLLATE utf16_spanish2_ci NOT NULL
+  `notas` varchar(255) COLLATE utf16_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `dotes_personaje`
+--
+
+INSERT INTO `dotes_personaje` (`id_personaje`, `id_dote`, `notas`) VALUES
+(3, 1, 'Check');
 
 -- --------------------------------------------------------
 
@@ -302,21 +316,29 @@ CREATE TABLE `equipo` (
   `id_personaje` int(11) NOT NULL,
   `id_objeto` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf16_spanish2_ci NOT NULL,
-  `bonus_arma` int(11) NOT NULL,
-  `dano` int(11) NOT NULL,
-  `critico` varchar(10) COLLATE utf16_spanish2_ci NOT NULL,
-  `alcance` int(11) NOT NULL,
-  `tipo_dano` varchar(50) COLLATE utf16_spanish2_ci NOT NULL,
+  `tipo_objeto` tinyint(1) NOT NULL,
+  `bonus_arma` int(11) DEFAULT NULL,
+  `dano` varchar(11) COLLATE utf16_spanish2_ci DEFAULT NULL,
+  `critico` varchar(10) COLLATE utf16_spanish2_ci DEFAULT NULL,
+  `alcance` int(11) DEFAULT NULL,
+  `tipo_dano` varchar(50) COLLATE utf16_spanish2_ci DEFAULT NULL,
   `municion` int(11) DEFAULT NULL,
-  `propiedades` varchar(255) COLLATE utf16_spanish2_ci NOT NULL,
-  `tipo_armadura` varchar(255) COLLATE utf16_spanish2_ci NOT NULL,
-  `bonus_armadura` int(11) NOT NULL,
-  `max_destreza` int(11) NOT NULL,
-  `penalty` int(11) NOT NULL,
-  `fallo_conjuro` int(11) NOT NULL,
-  `velocidad` int(11) NOT NULL,
-  `peso` int(11) NOT NULL
+  `propiedades` varchar(255) COLLATE utf16_spanish2_ci DEFAULT NULL,
+  `tipo_armadura` varchar(255) COLLATE utf16_spanish2_ci DEFAULT NULL,
+  `bonus_armadura` int(11) DEFAULT NULL,
+  `max_destreza` int(11) DEFAULT NULL,
+  `penalty` int(11) DEFAULT NULL,
+  `fallo_conjuro` int(11) DEFAULT NULL,
+  `velocidad` int(11) DEFAULT NULL,
+  `peso` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `equipo`
+--
+
+INSERT INTO `equipo` (`id_personaje`, `id_objeto`, `nombre`, `tipo_objeto`, `bonus_arma`, `dano`, `critico`, `alcance`, `tipo_dano`, `municion`, `propiedades`, `tipo_armadura`, `bonus_armadura`, `max_destreza`, `penalty`, `fallo_conjuro`, `velocidad`, `peso`) VALUES
+(3, 1, 'espada', 0, 5, '2d6', 'x19/20', 5, 'cortante', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -399,9 +421,9 @@ INSERT INTO `habilidades` (`id`, `nombre`, `penalizacion`, `solo_entrenamiento`,
 CREATE TABLE `habilidades_personaje` (
   `id_personaje` int(11) NOT NULL,
   `id_habilidad` int(11) NOT NULL,
-  `rangos` int(11) NOT NULL,
-  `mod_varios` int(11) NOT NULL,
-  `penalizador` int(11) NOT NULL
+  `rangos` int(11) DEFAULT NULL,
+  `mod_varios` int(11) DEFAULT NULL,
+  `penalizador` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -2351,6 +2373,13 @@ CREATE TABLE `personajes` (
   `id_imagen` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `personajes`
+--
+
+INSERT INTO `personajes` (`id`, `id_usuario`, `nombre`, `nivel`, `id_clase`, `id_raza`, `id_alineamiento`, `genero`, `tamano`, `edad`, `idiomas`, `id_imagen`) VALUES
+(3, 17, 'pepito', '5', 4, 3, 3, 'hombre', 'pequeño', '30', 'comun', 1234);
+
 -- --------------------------------------------------------
 
 --
@@ -2386,9 +2415,18 @@ CREATE TABLE `salvaciones` (
   `tipo` varchar(255) COLLATE utf16_spanish2_ci NOT NULL,
   `base` int(11) NOT NULL,
   `caracteristica` int(11) NOT NULL,
-  `magic` int(11) NOT NULL,
-  `misc` int(11) NOT NULL
+  `magic` int(11) DEFAULT NULL,
+  `misc` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `salvaciones`
+--
+
+INSERT INTO `salvaciones` (`id_personaje`, `tipo`, `base`, `caracteristica`, `magic`, `misc`) VALUES
+(3, 'fortaleza', 3, 2, NULL, NULL),
+(3, 'reflejos', 4, 6, NULL, 2),
+(3, 'voluntad', 1, 3, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -2424,9 +2462,16 @@ INSERT INTO `usuarios` (`id`, `email`, `contrasena`) VALUES
 CREATE TABLE `vida` (
   `id_personaje` int(11) NOT NULL,
   `pg_max` int(11) NOT NULL,
-  `pg_actuales` int(11) NOT NULL,
-  `dano_no_letal` int(11) NOT NULL
+  `heridas` int(11) DEFAULT NULL,
+  `dano_no_letal` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `vida`
+--
+
+INSERT INTO `vida` (`id_personaje`, `pg_max`, `heridas`, `dano_no_letal`) VALUES
+(3, 80, 40, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -2543,7 +2588,7 @@ ALTER TABLE `razas`
 -- Indices de la tabla `salvaciones`
 --
 ALTER TABLE `salvaciones`
-  ADD PRIMARY KEY (`id_personaje`);
+  ADD PRIMARY KEY (`id_personaje`,`tipo`) USING BTREE;
 
 --
 -- Indices de la tabla `usuarios`
@@ -2572,7 +2617,7 @@ ALTER TABLE `alineamientos`
 -- AUTO_INCREMENT de la tabla `caracteristicas`
 --
 ALTER TABLE `caracteristicas`
-  MODIFY `id_personaje` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_personaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `clases`
@@ -2596,7 +2641,7 @@ ALTER TABLE `dotes`
 -- AUTO_INCREMENT de la tabla `equipo`
 --
 ALTER TABLE `equipo`
-  MODIFY `id_objeto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_objeto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `habilidades`
@@ -2620,7 +2665,7 @@ ALTER TABLE `inventario`
 -- AUTO_INCREMENT de la tabla `personajes`
 --
 ALTER TABLE `personajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `razas`

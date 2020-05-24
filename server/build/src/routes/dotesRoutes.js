@@ -12,6 +12,7 @@ class DotesRoutes {
     }
     config() {
         this.router.post('/', dotesController_1.default.list);
+        this.router.post('/personaje/:id', dotesController_1.default.dotesPj);
         this.router.post('/:id', dotesController_1.default.getOne);
     }
 }

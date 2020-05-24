@@ -19,6 +19,7 @@ class HabilidadesController {
         return __awaiter(this, void 0, void 0, function* () {
             var id = req.body.token;
             if (yield userCheck_1.default.checkUser(id)) {
+                delete req.body.token;
                 const habilidades = yield database_1.default.then((r) => r.query('select * from habilidades'));
                 res.json(habilidades);
             }
@@ -31,6 +32,7 @@ class HabilidadesController {
         return __awaiter(this, void 0, void 0, function* () {
             var token = req.body.token;
             if (yield userCheck_1.default.checkUser(token)) {
+                delete req.body.token;
                 const { id } = req.params;
                 const habilidades = yield database_1.default.then((r) => r.query('select * from habilidades h inner join habilidades_personaje hp on hp.id_habilidad=h.id where hp.id_personaje=? order by h.nombre', [id]));
                 if (habilidades.length > 0) {

@@ -8,6 +8,7 @@ class RazasController {
     public async list(req: Request, res: Response){
         var id = req.body.token;
         if(await userCheck.checkUser(id)){
+            delete req.body.token;
             const razas = await pool.then((r: any) => r.query('SELECT * FROM razas'));
             res.json(razas);
         }else {
@@ -19,6 +20,7 @@ class RazasController {
     public async getOne(req: Request, res: Response){
         var token = req.body.token;
         if(await userCheck.checkUser(token)){
+            delete req.body.token;
             const { id } = req.params;
             const raza = await pool.then((r:any) => r.query('SELECT * FROM razas WHERE id=?', [id]));
             if(raza.length > 0){

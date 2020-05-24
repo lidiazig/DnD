@@ -7,6 +7,7 @@ class DotesRoutes {
     }
     config(): void {
         this.router.post('/', dotesController.list);
+        this.router.post('/personaje/:id', dotesController.dotesPj);
         this.router.post('/:id', dotesController.getOne);
     }
 }

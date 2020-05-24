@@ -8,6 +8,7 @@ class AlineamientosController {
     public async list(req: Request, res: Response){
         var id = req.body.token;
         if(await userCheck.checkUser(id)){
+            delete req.body.token;
             const alineamientos = await pool.then((r: any) => r.query('SELECT * FROM alineamientos'));
             res.json(alineamientos);
         }else {
@@ -18,6 +19,7 @@ class AlineamientosController {
     public async getOne(req: Request, res: Response){
         var token = req.body.token;
         if(await userCheck.checkUser(token)){
+            delete req.body.token;
             const { id } = req.params;
             const alineamiento = await pool.then((r:any) => r.query('SELECT * FROM alineamientos WHERE id=?', [id]));
             if(alineamiento.length > 0){

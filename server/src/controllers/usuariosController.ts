@@ -31,7 +31,6 @@ class UsuariosController {
         }
         res.status(404).json({text: 'Email o contraseña incorrecta'});
     }
-
 }
 
 const usuariosController = new UsuariosController();

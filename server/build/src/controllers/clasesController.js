@@ -19,6 +19,7 @@ class ClasesController {
         return __awaiter(this, void 0, void 0, function* () {
             var id = req.body.token;
             if (yield userCheck_1.default.checkUser(id)) {
+                delete req.body.token;
                 const clases = yield database_1.default.then((r) => r.query('SELECT * FROM clases'));
                 res.json(clases);
             }
@@ -31,6 +32,7 @@ class ClasesController {
         return __awaiter(this, void 0, void 0, function* () {
             var token = req.body.token;
             if (yield userCheck_1.default.checkUser(token)) {
+                delete req.body.token;
                 const { id } = req.params;
                 const clase = yield database_1.default.then((r) => r.query('SELECT * FROM clases WHERE id=?', [id]));
                 if (clase.length > 0) {
