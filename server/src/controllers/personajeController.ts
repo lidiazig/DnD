@@ -32,6 +32,21 @@ class PersonajeController {
         }
     }
 
+    public async getPersonajesUser(req: Request, res: Response) {
+        var token = req.body.token;
+        if (await userCheck.checkUser(token)) {
+            const personajes = await pool.then((r: any) => r.query('SELECT p.id, p.nombre, c.clase FROM personajes p inner join clases c where p.id_usuario=? and c.id = p.id_clase', [token]));
+
+            if (personajes.length > 0) {
+                return res.json(personajes);
+            }
+
+            res.status(404).json({text: 'El usuario no tiene personajes'});
+        } else {
+            res.status(401).json({text: 'Usuario no autorizado'});
+        }
+    }
+
     public async deletePersonaje(req: Request, res: Response) {
         var token = req.body.token;
         if (await userCheck.checkUser(token)) {

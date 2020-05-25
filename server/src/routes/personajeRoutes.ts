@@ -9,6 +9,7 @@ class PersonajeRoutes {
     config(): void {
         this.router.post('/', personajeController.savePersonaje);
         this.router.post('/:id', personajeController.getPersonaje);
+        this.router.post('/user/:id', personajeController.getPersonajesUser);
         this.router.post('/delete/:id', personajeController.deletePersonaje);
     }
 }
