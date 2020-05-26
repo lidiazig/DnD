@@ -5,14 +5,27 @@ import userCheck from "./userCheck";
 class InventarioController {
 
     public async addObject(req: Request, res: Response) {
-        var id = req.body.token;
-        if(await userCheck.checkUser(id)){
-            delete req.body.token;
-            await pool.then((r: any) => r.query('INSERT INTO inventario set ?', [req.body]));
+  //      var id = req.body.token;
+   //     if(await userCheck.checkUser(id)){
+   //         delete req.body.token;
+        if(req.body.length>0)
+        {
+
+            let data: any[];
+            data = [];
+            for (let i = 0; i < req.body.length; i++) {
+                console.log (Object.values(req.body[i]));
+                console.log (Object.keys(req.body[i]));
+                data.push(Object.values(req.body[i]));
+            }
+
+
+
+            const inventario = await pool.then((r: any) => r.query('INSERT INTO inventario (cantidad, id_personaje, nombre) values ? ', [data]));
             return res.json({text: 'objeto insertado'});
-        }else {
-            res.status(401).json({text: 'Usuario no autorizado'});
         }
+        return res.json({text: 'objeto insertado'});
+
     }
 
     public async getInventario(req: Request, res: Response) {

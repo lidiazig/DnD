@@ -5,9 +5,9 @@ import userCheck from "./userCheck";
 class CaracteristicasController {
 
     public async saveCaracteristicas(req: Request, res: Response) {
-        var token = req.body.token;
-        if(await userCheck.checkUser(token)){
-            delete req.body.token;
+      //  var token = req.body.token;
+       // if(await userCheck.checkUser(token)){
+       //     delete req.body.token;
             const caracteristicas = await pool.then((r: any) => r.query('INSERT INTO caracteristicas set ?',[req.body]));
 
             if(caracteristicas.affectedRows > 0){
@@ -15,9 +15,9 @@ class CaracteristicasController {
             }
 
             res.status(404).json({text: 'No se han obtenido las caracteristicas del pj'});
-        }else {
-            res.status(401).json({text: 'Usuario no autorizado'});
-        }
+     //   }else {
+     //       res.status(401).json({text: 'Usuario no autorizado'});
+     //   }
     }
 
     public async getCaracteristicas(req: Request, res: Response) {

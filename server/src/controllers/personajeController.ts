@@ -5,14 +5,15 @@ import userCheck from "./userCheck";
 class PersonajeController {
 
     public async savePersonaje(req: Request, res: Response) {
-        var id = req.body.token;
-        if (await userCheck.checkUser(id)) {
-            delete req.body.token;
-            await pool.then((r: any) => r.query('INSERT INTO personajes set ?', [req.body]));
-            return res.json({text: 'personaje insertado'});
-        } else {
-            res.status(401).json({text: 'Usuario no autorizado'});
-        }
+        // var id = req.body.token;
+        //  if (await userCheck.checkUser(id)) {
+        //       delete req.body.token;
+        delete req.body.idUsuario;
+        const response=await pool.then((r: any) => r.query('INSERT INTO personajes set ?', [req.body]));
+        return res.json(response.insertId);
+        //    } else {
+        //      res.status(401).json({text: 'Usuario no autorizado'});
+        //   }
     }
 
     public async getPersonaje(req: Request, res: Response) {

@@ -5,9 +5,9 @@ import userCheck from "./userCheck";
 class VidaController {
 
     public async saveVida(req: Request, res: Response) {
-        var token = req.body.token;
-        if(await userCheck.checkUser(token)){
-            delete req.body.token;
+     //   var token = req.body.token;
+     //   if(await userCheck.checkUser(token)){
+     //       delete req.body.token;
             const vida = await pool.then((r: any) => r.query('INSERT INTO vida set ?',[req.body]));
 
             if(vida.affectedRows > 0){
@@ -15,9 +15,9 @@ class VidaController {
             }
 
             res.status(404).json({text: 'No se ha obtenido la vida del pj'});
-        }else {
-            res.status(401).json({text: 'Usuario no autorizado'});
-        }
+    //    }else {
+    //        res.status(401).json({text: 'Usuario no autorizado'});
+     //   }
     }
 
     public async getVida(req: Request, res: Response) {

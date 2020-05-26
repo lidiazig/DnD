@@ -36,7 +36,7 @@ class DotesController {
         if(await userCheck.checkUser(token)){
             delete req.body.token;
             const { id } = req.params;
-            const dote = await pool.then((r:any) => r.query('SELECT d.*, dp.notas FROM dotes d INNER JOIN dotes_personaje dp WHERE d.id=?', [id]));
+            const dote = await pool.then((r:any) => r.query('SELECT * FROM dotes WHERE id=?', [id]));
             if(dote.length > 0){
                 return res.json(dote[0]);
             }
