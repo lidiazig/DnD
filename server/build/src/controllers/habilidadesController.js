@@ -15,6 +15,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../../database"));
 const userCheck_1 = __importDefault(require("./userCheck"));
 class HabilidadesController {
+    saveHabilidades(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            //      var id = req.body.token;
+            //     if(await userCheck.checkUser(id)){
+            //         delete req.body.token;
+            if (req.body.length > 0) {
+                let data;
+                data = [];
+                for (let i = 0; i < req.body.length; i++) {
+                    console.log(Object.values(req.body[i]));
+                    console.log(Object.keys(req.body[i]));
+                    delete req.body[i].caracteristica;
+                    delete req.body[i].nombre;
+                    delete req.body[i].penalizacion;
+                    delete req.body[i].solo_entrenamiento;
+                    data.push(Object.values(req.body[i]));
+                }
+                const habilidades = yield database_1.default.then((r) => r.query('INSERT INTO habilidades_personaje (id_habilidad, id_personaje, mod_varios, penalizador, rangos) values ? ', [data]));
+                return res.json({ text: 'dotes insertadas' });
+            }
+            return res.json({ text: 'dotes insertadas' });
+        });
+    }
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var id = req.body.token;

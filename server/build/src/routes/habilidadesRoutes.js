@@ -12,7 +12,8 @@ class HabilidadesRoutes {
     }
     config() {
         this.router.post('/', habilidadesController_1.default.list);
-        this.router.post('/', habilidadesController_1.default.listPj);
+        this.router.post('/save', habilidadesController_1.default.saveHabilidades);
+        this.router.post('/personaje/:id', habilidadesController_1.default.listPj);
         this.router.post('/:id', habilidadesController_1.default.getOne);
     }
 }

@@ -5,6 +5,31 @@ import userCheck from "./userCheck";
 
 class HabilidadesController {
 
+    public async saveHabilidades(req: Request, res: Response) {
+        //      var id = req.body.token;
+        //     if(await userCheck.checkUser(id)){
+        //         delete req.body.token;
+        if (req.body.length > 0) {
+
+            let data: any[];
+            data = [];
+            for (let i = 0; i < req.body.length; i++) {
+                console.log(Object.values(req.body[i]));
+                console.log(Object.keys(req.body[i]));
+                delete req.body[i].caracteristica;
+                delete req.body[i].nombre;
+                delete req.body[i].penalizacion;
+                delete req.body[i].solo_entrenamiento;
+                data.push(Object.values(req.body[i]));
+            }
+
+
+            const habilidades = await pool.then((r: any) => r.query('INSERT INTO habilidades_personaje (id_habilidad, id_personaje, mod_varios, penalizador, rangos) values ? ', [data]));
+            return res.json({text: 'dotes insertadas'});
+        }
+        return res.json({text: 'dotes insertadas'});
+    }
+
     public async list(req: Request, res: Response){
         var id = req.body.token;
         if(await userCheck.checkUser(id)){

@@ -42,7 +42,7 @@ class EquipoController {
         if (await userCheck.checkUser(token)) {
             delete req.body.token;
             const {id} = req.params;
-            const equipo = await pool.then((r: any) => r.query('SELECT id_objeto, tipo_objeto, nombre from equipo where id_personaje=?', [id]));
+            const equipo = await pool.then((r: any) => r.query('SELECT id_objeto, tipo_objeto, nombre, propiedades from equipo where id_personaje=?', [id]));
             if (equipo.length > 0) {
                 return res.json(equipo);
             }

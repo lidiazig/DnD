@@ -7,7 +7,8 @@ class HabilidadesRoutes {
     }
     config(): void {
         this.router.post('/', habilidadesController.list);
-        this.router.post('/', habilidadesController.listPj);
+        this.router.post('/save', habilidadesController.saveHabilidades);
+        this.router.post('/personaje/:id', habilidadesController.listPj);
         this.router.post('/:id', habilidadesController.getOne);
     }
 }

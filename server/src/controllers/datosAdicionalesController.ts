@@ -5,32 +5,32 @@ import userCheck from "./userCheck";
 class DatosAdicionalesController {
 
     public async saveDatos(req: Request, res: Response) {
-      //  var token = req.body.token;
-      //  if(await userCheck.checkUser(token)){
-       //     delete req.body.token;
-            const datos = await pool.then((r: any) => r.query('INSERT INTO datos_adicionales set ?',[req.body]));
+        //  var token = req.body.token;
+        //  if(await userCheck.checkUser(token)){
+        //     delete req.body.token;
+        const datos = await pool.then((r: any) => r.query('INSERT INTO datos_adicionales set ?', [req.body]));
 
-            if(datos.affectedRows > 0){
-                return res.json({text: 'datos insertados'});
-            }
+        if (datos.affectedRows > 0) {
+            return res.json({text: 'datos insertados'});
+        }
 
-            res.status(404).json({text: 'No se han obtenido los datos adicionales del pj'});
-       // }else {
-     //       res.status(401).json({text: 'Usuario no autorizado'});
-     //   }
+        res.status(404).json({text: 'No se han obtenido los datos adicionales del pj'});
+        // }else {
+        //       res.status(401).json({text: 'Usuario no autorizado'});
+        //   }
     }
 
     public async getDatos(req: Request, res: Response) {
         var token = req.body.token;
-        if(await userCheck.checkUser(token)){
+        if (await userCheck.checkUser(token)) {
             delete req.body.token;
-            const { id } = req.params;
-            const datos = await pool.then((r: any) => r.query('SELECT * FROM datos_adicionales where id_personaje=?',[id]));
-            if(datos.length > 0){
+            const {id} = req.params;
+            const datos = await pool.then((r: any) => r.query('SELECT * FROM datos_adicionales where id_personaje=?', [id]));
+            if (datos.length > 0) {
                 res.json(datos[0]);
-            }
-            res.status(404).json({text: 'No se han obtenido los datos adicionales del pj'});
-        }else {
+            } else
+                res.status(404).json({text: 'No se han obtenido los datos adicionales del pj'});
+        } else {
             res.status(401).json({text: 'Usuario no autorizado'});
         }
     }
