@@ -52,8 +52,10 @@ class PersonajeController {
         var token = req.body.token;
         if (await userCheck.checkUser(token)) {
             const {id} = req.params;
+            console.log(id);
             const personaje = await pool.then((r: any) => r.query('DELETE FROM personajes where id=? and id_usuario=?', [id, token]));
 
+            console.log(personaje);
             if (personaje.affectedRows > 0)
                 return res.json({text: 'personaje eliminado'});
 

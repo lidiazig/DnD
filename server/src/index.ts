@@ -14,6 +14,7 @@ import datosAdicionalesRoutes from './routes/datosAdicionalesRoutes';
 import equiposRoutes from './routes/equiposRoutes';
 import salvacionesRoutes from './routes/salvacionesRoutes';
 import vidaRoutes from './routes/vidaRoutes';
+import armorClassRoutes from './routes/armorClassRoutes';
 import morgan from 'morgan';
 import cors from 'cors';
 
@@ -49,6 +50,7 @@ class Server {
         this.app.use('/api/equipo',equiposRoutes);
         this.app.use('/api/salvaciones',salvacionesRoutes);
         this.app.use('/api/vida',vidaRoutes);
+        this.app.use('/api/armor',armorClassRoutes);
     }
 
     start(): void {

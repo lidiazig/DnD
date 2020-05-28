@@ -33,7 +33,7 @@ class InventarioController {
             const {id} = req.params;
             const inventario = await pool.then((r: any) => r.query('SELECT * FROM inventario where id_personaje=?', [id]));
             if (inventario.length > 0) {
-                res.json(inventario);
+                return res.json(inventario);
             } else
                 res.status(404).json({text: 'El inventario no existe'});
         } else {

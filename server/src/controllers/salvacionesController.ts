@@ -34,7 +34,7 @@ class SalvacionesController {
             const {id} = req.params;
             const salvaciones = await pool.then((r: any) => r.query('SELECT * FROM salvaciones where id_personaje=?', [id]));
             if (salvaciones.length > 0) {
-                res.json(salvaciones);
+                return res.json(salvaciones);
             } else
                 res.status(404).json({text: 'No se han obtenido las salvaciones del pj'});
         } else {

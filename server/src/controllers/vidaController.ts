@@ -27,7 +27,7 @@ class VidaController {
             const {id} = req.params;
             const vida = await pool.then((r: any) => r.query('SELECT * FROM vida where id_personaje=?', [id]));
             if (vida.length > 0) {
-                res.json(vida[0]);
+                return res.json(vida[0]);
             } else
                 res.status(404).json({text: 'No se ha obtenido la vida del pj'});
         } else {

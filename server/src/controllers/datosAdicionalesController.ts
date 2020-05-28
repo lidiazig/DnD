@@ -27,7 +27,7 @@ class DatosAdicionalesController {
             const {id} = req.params;
             const datos = await pool.then((r: any) => r.query('SELECT * FROM datos_adicionales where id_personaje=?', [id]));
             if (datos.length > 0) {
-                res.json(datos[0]);
+                return res.json(datos[0]);
             } else
                 res.status(404).json({text: 'No se han obtenido los datos adicionales del pj'});
         } else {

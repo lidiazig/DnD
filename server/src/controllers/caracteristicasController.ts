@@ -26,7 +26,7 @@ class CaracteristicasController {
             const {id} = req.params;
             const caracteristicas = await pool.then((r: any) => r.query('SELECT * FROM caracteristicas where id_personaje=?', [id]));
             if (caracteristicas.length > 0) {
-                res.json(caracteristicas[0]);
+                return res.json(caracteristicas[0]);
             } else
                 res.status(404).json({text: 'No se han obtenido las caracteristicas del pj'});
         } else {

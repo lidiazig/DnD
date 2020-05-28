@@ -19,6 +19,7 @@ const datosAdicionalesRoutes_1 = __importDefault(require("./routes/datosAdiciona
 const equiposRoutes_1 = __importDefault(require("./routes/equiposRoutes"));
 const salvacionesRoutes_1 = __importDefault(require("./routes/salvacionesRoutes"));
 const vidaRoutes_1 = __importDefault(require("./routes/vidaRoutes"));
+const armorClassRoutes_1 = __importDefault(require("./routes/armorClassRoutes"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
 class Server {
@@ -50,6 +51,7 @@ class Server {
         this.app.use('/api/equipo', equiposRoutes_1.default);
         this.app.use('/api/salvaciones', salvacionesRoutes_1.default);
         this.app.use('/api/vida', vidaRoutes_1.default);
+        this.app.use('/api/armor', armorClassRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port')), () => {
