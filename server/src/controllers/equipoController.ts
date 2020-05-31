@@ -18,6 +18,7 @@ class EquipoController {
             dataArmadura = [];
 
             for (let i = 0; i < req.body.length; i++) {
+                delete req.body[i].id_objeto;
                 console.log(Object.values(req.body[i]));
                 console.log(Object.keys(req.body[i]));
                 if (req.body[i].tipo_objeto == 0)
@@ -25,6 +26,7 @@ class EquipoController {
                 else
                     dataArmadura.push(Object.values(req.body[i]));
             }
+            console.log(dataArmadura);
 
             const arma = await pool.then((r: any) => r.query('INSERT INTO equipo (bonus_arma, critico, dano, municion, alcance, tipo_dano, id_personaje, nombre, propiedades,tipo_objeto) values ?', [dataArma]));
             const armadura = await pool.then((r: any) => r.query('INSERT INTO equipo (bonus_armadura, max_destreza, penalty, peso, fallo_conjuro, tipo_armadura, velocidad, id_personaje, nombre, propiedades, tipo_objeto) values ?', [dataArmadura]));

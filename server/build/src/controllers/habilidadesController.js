@@ -24,8 +24,8 @@ class HabilidadesController {
                 let data;
                 data = [];
                 for (let i = 0; i < req.body.length; i++) {
-                    console.log(Object.values(req.body[i]));
-                    console.log(Object.keys(req.body[i]));
+                    //   console.log(Object.values(req.body[i]));
+                    //   console.log(Object.keys(req.body[i]));
                     delete req.body[i].caracteristica;
                     delete req.body[i].nombre;
                     delete req.body[i].penalizacion;
@@ -33,24 +33,25 @@ class HabilidadesController {
                     data.push(Object.values(req.body[i]));
                 }
                 const habilidades = yield database_1.default.then((r) => r.query('INSERT INTO habilidades_personaje (id_habilidad, id_personaje, mod_varios, penalizador, rangos) values ? ', [data]));
-                return res.json({ text: 'dotes insertadas' });
+                return res.json({ text: 'habilidades insertadas' });
             }
-            return res.json({ text: 'dotes insertadas' });
+            return res.json({ text: 'habilidades insertadas' });
         });
     }
-    list(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
+    /*
+        public async list(req: Request, res: Response){
             var id = req.body.token;
-            if (yield userCheck_1.default.checkUser(id)) {
+            if(await userCheck.checkUser(id)){
                 delete req.body.token;
-                const habilidades = yield database_1.default.then((r) => r.query('select * from habilidades'));
+                const habilidades = await pool.then((r: any) => r.query('select * from habilidades'));
                 res.json(habilidades);
+            }else {
+                res.status(401).json({text: 'Usuario no autorizado'});
             }
-            else {
-                res.status(401).json({ text: 'Usuario no autorizado' });
-            }
-        });
-    }
+    
+        }
+    
+     */
     listPj(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             var token = req.body.token;
@@ -59,6 +60,10 @@ class HabilidadesController {
                 const { id } = req.params;
                 const habilidades = yield database_1.default.then((r) => r.query('select * from habilidades h inner join habilidades_personaje hp on hp.id_habilidad=h.id where hp.id_personaje=? order by h.nombre', [id]));
                 if (habilidades.length > 0) {
+                    return res.json(habilidades);
+                }
+                else {
+                    const habilidades = yield database_1.default.then((r) => r.query('select * from habilidades'));
                     return res.json(habilidades);
                 }
                 res.status(404).json({ text: 'El personaje no existe' });

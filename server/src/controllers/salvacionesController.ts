@@ -11,8 +11,8 @@ class SalvacionesController {
         let data: any[];
         data = [];
         for (let i = 0; i < req.body.length; i++) {
-            console.log(Object.values(req.body[i]));
-            console.log(Object.keys(req.body[i]));
+           console.log(Object.values(req.body[i]));
+           console.log(Object.keys(req.body[i]));
             data.push(Object.values(req.body[i]));
         }
 

@@ -14,8 +14,8 @@ class DotesController {
             let data: any[];
             data = [];
             for (let i = 0; i < req.body.length; i++) {
-                console.log(Object.values(req.body[i]));
-                console.log(Object.keys(req.body[i]));
+             //   console.log(Object.values(req.body[i]));
+              //  console.log(Object.keys(req.body[i]));
                 delete req.body[i].descripcion;
                 delete req.body[i].nombre;
                 delete req.body[i].prerrequisito;
